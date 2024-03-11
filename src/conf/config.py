@@ -1,4 +1,5 @@
-from pydantic import BaseSettings
+
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -12,10 +13,14 @@ class Settings(BaseSettings):
     mail_server: str
     redis_host: str = 'localhost'
     redis_port: int = 6379
+    cloudinary_name: str
+    cloudinary_key: str
+    cloudinary_secret: str
 
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "ignore"
 
 
 settings = Settings()
