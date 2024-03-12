@@ -29,7 +29,7 @@ async def get_contacts(skip: int, limit: int, user: User, db: Session, query: st
                  Contact.email.ilike(f"%{query}%"))
         ).offset(skip).limit(limit).all()
     else:
-        return db.query(Contact).offset(skip).limit(limit).all()
+        return db.query(Contact).filter(Contact.user_id == user.id).offset(skip).limit(limit).all()
 
 
 async def get_upcoming_birthdays(skip: int, limit: int, user: User, db: Session) -> List[Contact]:
